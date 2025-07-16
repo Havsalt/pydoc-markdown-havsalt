@@ -78,10 +78,26 @@ class RuffMarkdownRenderer(MarkdownRenderer):
     """Use custom formatting of function/method arguments.
 
     This formatting is like the one used by `ruff`.
+
+    See the docs for a list default values.
+
+    Example:
+
+    Using #RuffMarkdownRenderer in `pyproject.toml`:
+
+    ```toml
+    [tool.pydoc-markdown.renderer]
+    type = "pydoc_markdown_havsalt.RuffMarkdownRenderer"
+    include_self_arg = true
+    include_cls_arg = true
+    tab_size = 2
+    ```
     """
 
-    #: Whether to override default formatting.
-    #: Overridden and disabled by default.
+    #: Whether to override the *new* default formatting.
+    #: The parent class #MarkdownRenderer has this turned on by default,
+    #: but this class provides a custom implementation.
+    #: Disabled by default.
     format_code: bool = False
 
     #: Whether to include `self` argument in a method.
