@@ -3,7 +3,7 @@ from dataclasses import dataclass
 
 import docspec
 import typing_extensions as te
-from pydoc_markdown.util.docspec import is_function, is_method
+from pydoc_markdown.util.docspec import is_function
 from pydoc_markdown.contrib.renderers.markdown import MarkdownRenderer, dotted_name
 
 
