@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "pydoc-markdown-havsalt"
-version = "0.1.1"
+version = "0.1.2"
 description = "Plugin for pydoc-markdown"
 license = { file = "LICENSE" }
 readme = "README.md"
