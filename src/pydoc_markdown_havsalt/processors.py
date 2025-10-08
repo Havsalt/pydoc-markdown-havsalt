@@ -34,7 +34,7 @@ class ComposePublicExportsProcessor(Processor):
             raise ValueError(
                 "Parameter 'modules' is empty, when expected to have at least 1 element"
             )
-        top_mod = modules[0]
+        top_mod = modules[0]  # Assume first module is top level module
         for member in top_mod.members:
             if not isinstance(member, docspec.Variable):
                 continue
