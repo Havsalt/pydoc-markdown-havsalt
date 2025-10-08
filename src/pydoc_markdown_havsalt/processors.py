@@ -30,6 +30,10 @@ class ComposePublicExportsProcessor(Processor):
 
     def process(self, modules: list[docspec.Module], resolver: Resolver | None) -> None:
         # Fetch `__all__` fields in top module
+        if not modules:
+            raise ValueError(
+                "Parameter 'modules' is empty, when expected to have at least 1 element"
+            )
         top_mod = modules[0]
         for member in top_mod.members:
             if not isinstance(member, docspec.Variable):
