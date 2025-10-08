@@ -25,7 +25,8 @@ class ComposePublicExportsProcessor(Processor):
 
     def __post_init__(self) -> None:
         self._all_public_names: set[str] = set()
-        self._all_public_objs: list[docspec.ApiObject] = []
+        #: Pair structure: <ApiObject>.name: <ApiObject>
+        self._all_public_objs: dict[str, docspec.ApiObject] = {}
 
     def process(self, modules: list[docspec.Module], resolver: Resolver | None) -> None:
         # Fetch `__all__` fields in top module
@@ -47,7 +48,7 @@ class ComposePublicExportsProcessor(Processor):
         docspec.visit(modules, self._process)
         # Replace top level module with all public exports
         top_mod.members.clear()
-        top_mod.members.extend(self._all_public_objs)  # type: ignore
+        top_mod.members.extend(self._all_public_objs.values())  # type: ignore
         top_mod.sync_hierarchy()
         # Mutate to keep only top level module (the __init__.py)
         modules.clear()
@@ -58,9 +59,9 @@ class ComposePublicExportsProcessor(Processor):
             return
         if obj.name not in self._all_public_names:
             return
-        if obj in self._all_public_objs:
+        if obj.name in self._all_public_objs:
             return
-        self._all_public_objs.append(obj)
+        self._all_public_objs[obj.name] = obj
 
     def _parse_export_string(self, export_string: str) -> set[str]:
         # fmt: off
@@ -75,6 +76,7 @@ class ComposePublicExportsProcessor(Processor):
                     .replace("\n", "")  # Remove newlines if vertical layout
                     .replace(" ", "")   # Remove spaces, to better split
                     .strip("[]")        # Remove outer brackets
+                    .strip("()")        # - or parentheses, if used instead of brackets
                     .split(",")         # Split each element
                 )
             )
