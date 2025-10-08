@@ -9,7 +9,9 @@ Often used in `Havsalt`'s projects.
 """
 
 __all__ = [
+    "ComposePublicExportsProcessor",
     "RuffMarkdownRenderer",
 ]
 
+from .processors import ComposePublicExportsProcessor
 from .renderers import RuffMarkdownRenderer
