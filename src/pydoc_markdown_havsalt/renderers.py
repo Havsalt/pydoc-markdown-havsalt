@@ -75,10 +75,9 @@ def format_function_signature(
 
 @dataclass
 class RuffMarkdownRenderer(MarkdownRenderer):
-    """Use custom formatting of function/method arguments.
+    """`RuffMarkdownRenderer` for better formatting of function/method arguments.
 
     This formatting is like the one used by `ruff`.
-
     See the docs for a list default values.
 
     Example:
