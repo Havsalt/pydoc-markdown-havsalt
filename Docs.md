@@ -58,10 +58,9 @@ type = "pydoc_markdown_havsalt.ComposePublicExportsProcessor"
 class RuffMarkdownRenderer(MarkdownRenderer)
 ```
 
-Use custom formatting of function/method arguments.
+`RuffMarkdownRenderer` for better formatting of function/method arguments.
 
 This formatting is like the one used by `ruff`.
-
 See the docs for a list default values.
 
 **Example**:
